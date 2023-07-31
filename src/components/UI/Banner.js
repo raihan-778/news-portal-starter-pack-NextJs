@@ -6,8 +6,8 @@ import {
   ProfileOutlined,
 } from "@ant-design/icons";
 import Image from "next/image";
-import DrawingImage from "@/assets/images/banner-images/drawing_image.jpg";
-import EagleImage from "@/assets/images/banner-images/eagle_image.jpg";
+import DrawingImage from "../../assets/images/banner-images/drawing_image.jpg";
+import EagleImage from "../../assets/images/banner-images/eagle_image.jpg";
 
 const contentStyle = {
   height: "425px",
@@ -87,7 +87,7 @@ const Banner = () => (
           }}
           style={contentStyle}
         >
-          <Image src={DrawingImage} fill alt="drawing_image" />
+          <Image src={DrawingImage} alt="drawing_image" />
         </Col>
       </Row>
     </div>
@@ -163,7 +163,6 @@ const Banner = () => (
         >
           <Image
             src={EagleImage}
-            fill
             alt="eagle_image"
             style={{ grayScale: "-1" }}
           />
