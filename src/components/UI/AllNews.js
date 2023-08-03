@@ -40,8 +40,8 @@ const AllNews = ({ allNews }) => {
               cover={
                 <Image
                   src={news?.image_url}
-                  width={500}
-                  height={200}
+                  // width={500}
+                  // height={200}
                   responsive
                   alt="news image"
                 />
