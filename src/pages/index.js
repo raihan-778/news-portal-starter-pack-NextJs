@@ -1,10 +1,22 @@
 import Head from "next/head";
 import RootLayout from "@/components/Layouts/RootLayout";
-import Banner from "@/components/UI/Banner";
+// import Banner from "@/components/UI/Banner";
 import AllNews from "@/components/UI/AllNews";
+import { useGetAllnewsesQuery } from "@/redux/api/api";
+import dynamic from "next/dynamic";
 
 const HomePage = ({ allNews }) => {
+  const { data, isLoading, isError, errorMessage } = useGetAllnewsesQuery();
+  console.log(data);
   console.log(allNews);
+
+  const DynamicBanner = dynamic(() => import("@/components/UI/Banner"), {
+    loading: () => (
+      <h1 style={{ fontSize: "20px", color: "red" }}>Loading...</h1>
+    ),
+    ssr: false,
+  });
+
   return (
     <>
       <Head>
@@ -16,7 +28,7 @@ const HomePage = ({ allNews }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Banner />
+      <DynamicBanner />
       <AllNews allNews={allNews} />
     </>
   );
@@ -28,13 +40,13 @@ HomePage.getLayout = function getLayout(page) {
 };
 
 export const getServerSideProps = async () => {
-  const res = await fetch("http://localhost:5000/news");
+  const res = await fetch("http://localhost:3000/api/news");
   const data = await res.json();
   console.log(data);
 
   return {
     props: {
-      allNews: data,
+      allNews: data.data,
     },
     // revalidate: 10,//If we use getServerSideProps,we do not need to use revalidate because getServerSiderProps create page at the data rendar time so that we can get all updated data at the time of build
 
