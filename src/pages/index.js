@@ -39,7 +39,7 @@ HomePage.getLayout = function getLayout(page) {
   return <RootLayout>{page}</RootLayout>;
 };
 
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
   const res = await fetch("http://localhost:3000/api/news");
   const data = await res.json();
   console.log(data);
@@ -48,7 +48,8 @@ export const getServerSideProps = async () => {
     props: {
       allNews: data.data,
     },
-    // revalidate: 10,//If we use getServerSideProps,we do not need to use revalidate because getServerSiderProps create page at the data rendar time so that we can get all updated data at the time of build
+    revalidate: 10,
+    //If we use getServerSideProps,we do not need to use revalidate because getServerSiderProps create page at the data rendar time so that we can get all updated data at the time of build
 
     // here revalidate is used to rebuild this specific page after 10 seconds.So that we can get any update info within few seconds. This is a property of getStaticProps function.
   };
