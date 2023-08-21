@@ -1,5 +1,5 @@
-import Head from "next/head";
 import RootLayout from "@/components/Layouts/RootLayout";
+import Head from "next/head";
 // import Banner from "@/components/UI/Banner";
 import AllNews from "@/components/UI/AllNews";
 import { useGetAllnewsesQuery } from "@/redux/api/api";
